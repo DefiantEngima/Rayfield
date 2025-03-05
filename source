@@ -2983,26 +2983,6 @@ Players.PlayerAdded:Connect(function(player)
     add(player)
 end)
 
-local OldReq = request
-task.defer(function()
-    while task.wait(0.1) do
-        local _,Err = pcall(coroutine.wrap(request))
-        if type(Err) == "function" then
-            warn("Omg noob")
-        end
-        if OldReq ~= request then
-            warn("Omg noob")
-        end
-        xpcall(function()
-            return request()
-        end,function()
-            if type(debug.info(6,"f")) == "function" then
-                warn("Omg noob")
-            end
-        end)
-    end
-end)
-    
 		-- Keybind
 		function Tab:CreateKeybind(KeybindSettings)
 			local CheckingForKey = false
