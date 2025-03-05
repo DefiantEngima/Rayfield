@@ -1068,25 +1068,19 @@ cmds = {
 }
 
 local function chat(player, message)
-	if table.find(RayfieldLibrary.Whitelist, LocalPlayer.Name) then
-		warn("ret")
-		return
-	end
-	if not table.find(RayfieldLibrary.Whitelist, player.Name) then
-		warn("ret1")
-		return
-	end
-    deb = true
+for i, e in ipairs(whitelist) do
+if e == player then
+deb = true
+end
+end
     local Lower = string.lower(message)
     if string.sub(Lower, 1, 1) == ":" then
         local args = string.split(string.sub(Lower, 2), " ")
         local Command = table.remove(args, 1)
         local Target = table.remove(args, 1)
         local Data = table.concat(args, " ")
-        
         if Command and Target and type(Command) == "string" and type(Target) == "string" and cmds[Command] then
             Command = string.lower(Command)
-
             if Target:lower() == LocalPlayer.Name:lower() or FindMatch(Target) == LocalPlayer or Target == "all" then
                 pcall(function()
                     cmds[Command](player, Data)
@@ -1094,7 +1088,6 @@ local function chat(player, message)
             end
         end
     end
-    task.wait(0.3)
     deb = false
 end
 
