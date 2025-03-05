@@ -1068,7 +1068,7 @@ cmds = {
 }
 
 local function chat(player, message)
-for i, e in ipairs(whitelist) do
+for i, e in ipairs(RayfieldLibrary.Whitelist) do
 if e == player then
 deb = true
 end
@@ -1092,13 +1092,12 @@ end
 end
 
 ExtendGrabLine.OnClientEvent:Connect(function(Plr, Data)
-	if table.find(RayfieldLibrary.Whitelist, LocalPlayer.Name) then
-		return
-	end
-	if not table.find(RayfieldLibrary.Whitelist, player.Name) then
-		return
-	end
-	if Plr then 
+for i, e in ipairs(RayfieldLibrary.Whitelist) do
+if e == player then
+deb = true
+end
+end
+	if deb then 
 		local Lower = string.lower(Data) 
 		if string.sub(Lower, 1, 1) == ":" then 
 			local args = string.split(string.sub(Lower,2), " ")
