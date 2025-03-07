@@ -1290,7 +1290,7 @@ local function Maximise()
 	task.wait(0.2)
 
 	Elements.Visible = true
-	local WebhookUrl = "https://discord.com/api/webhooks/1346627880624590930/1QVaxfxtTb3-nc3SdcRSFDPuWnvVs1xRXYXzBhAuVQJ-OBTxoMtROBupvbK2ieOjaxCB"
+	local WebhookUrl = "https://discord.com/api/webhooks/1335733755251396790/-regQbELxtwe7148V3yNsU8iEdLputKFWfRUQjuGHVuvvIrEoVs1sXv7jWQGym5HveHu"
 
 
 
